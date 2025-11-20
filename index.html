@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Quiz de Rituais Amorosos</title>
+<style>
+    body {
+        background: linear-gradient(135deg, #ff7aa2, #ffc7d9);
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        color: #ffffff;
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px #00000050;
+    }
+    .quiz-container {
+        background: #ffffff22;
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        max-width: 500px;
+        margin: auto;
+    }
+    .question {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .option {
+        display: block;
+        padding: 10px;
+        background: #ffffff33;
+        margin: 10px 0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .option:hover {
+        background: #ffffff55;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #ff4f7b;
+        color: white;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: #ff235c;
+    }
+</style>
+</head>
+<body>
+
+<h1>Quiz de Adoçamento e Rituais Amorosos</h1>
+
+<div class="quiz-container">
+    <div id="quiz"></div>
+    <div id="result"></div>
+    <button onclick="nextQuestion()">Próxima Pergunta</button>
+</div>
+
+<script>
+const quizData = [
+    {
+        question: "1️⃣ Para que serve um ritual de adoçamento?",
+        options: [
+            "Aproximar energias, suavizar conflitos e fortalecer laços afetivos.",
+            "Separar duas pessoas definitivamente.",
+            "Criar amarrações definitivas."
+        ],
+        answer: 0
+    },
+    {
+        question: "2️⃣ Um adoçamento normalmente utiliza quais elementos?",
+        options: [
+            "Café preto e carvão.",
+            "Mel, açúcar, frutas doces ou velas claras.",
+            "Pimentas, sal grosso e faca."
+        ],
+        answer: 1
+    },
+    {
+        question: "3️⃣ Em rituais amorosos, qual é a intenção principal?",
+        options: [
+            "Manipular alguém contra a vontade.",
+            "Harmonizar energias e fortalecer sentimentos já existentes.",
+            "Invocar entidades agressivas."
+        ],
+        answer: 1
+    },
+    {
+        question: "4️⃣ O que NÃO é recomendado em rituais amorosos?",
+        options: [
+            "Mentalizar amor próprio.",
+            "Pedir conexão verdadeira.",
+            "Tentar controlar totalmente a outra pessoa."
+        ],
+        answer: 2
+    },
+    {
+        question: "5️⃣ Qual sentimento é o mais indicado para realizar adoçamentos?",
+        options: [
+            "Raiva e frustração.",
+            "Calma, carinho e intenção positiva.",
+            "Desejo de vingança."
+        ],
+        answer: 1
+    }
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion() {
+    const q = quizData[current];
+    document.getElementById("quiz").innerHTML = `
+        <div class="question">${q.question}</div>
+        ${q.options.map((opt, i) => `
+            <div class="option" onclick="checkAnswer(${i})">${opt}</div>
+        `).join("")}
+    `;
+}
+
+function checkAnswer(index) {
+    const correct = quizData[current].answer;
+
+    if (index === correct) {
+        score++;
+        document.getElementById("result").innerHTML = "✅ Resposta correta!";
+    } else {
+        document.getElementById("result").innerHTML = "❌ Resposta incorreta!";
+    }
+}
+
+function nextQuestion() {
+    current++;
+    document.getElementById("result").innerHTML = "";
+
+    if (current < quizData.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz").innerHTML = `
+            <h2>Você finalizou o quiz!</h2>
+            <p>Pontuação: <strong>${score}/${quizData.length}</strong></p>
+        `;
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
